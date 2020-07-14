@@ -12,12 +12,7 @@ import (
 	"github.com/lib/pq"
 )
 
-type userInfo struct {
-	UserName string `json:"username"`
-	Email    string `json:"email"`
-}
-
-// CreateHandler - Handles /create route
+// CreateHandler - Handles create route
 func CreateHandler(w http.ResponseWriter, req *http.Request) {
 	var userInfo userInfo
 

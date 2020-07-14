@@ -34,4 +34,5 @@ func main() {
 
 func regHandlers(r *mux.Router) {
 	r.HandleFunc("/create", handlers.CreateHandler).Methods(http.MethodPost)
+	r.HandleFunc("/list", handlers.ListHandler).Methods(http.MethodGet)
 }
