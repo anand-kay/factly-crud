@@ -80,28 +80,3 @@ func (userInfo *userInfo) checkData() (bool, string) {
 
 	return true, ""
 }
-
-// func checkUsername(username string) bool {
-// 	re := regexp.MustCompile("^[A-Za-z]+$")
-
-// 	if !re.MatchString(username) {
-// 		return false
-// 	}
-
-// 	return true
-// }
-
-// func checkEmail(email string) bool {
-// 	re := regexp.MustCompile("^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$")
-
-// 	if !re.MatchString(email) {
-// 		return false
-// 	}
-
-// 	return true
-// }
-
-// func (userInfo *userInfo) escapeHTML() {
-// 	userInfo.UserName = html.EscapeString(userInfo.UserName)
-// 	userInfo.Email = html.EscapeString(userInfo.Email)
-// }
