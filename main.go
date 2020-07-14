@@ -35,4 +35,6 @@ func main() {
 func regHandlers(r *mux.Router) {
 	r.HandleFunc("/create", handlers.CreateHandler).Methods(http.MethodPost)
 	r.HandleFunc("/list", handlers.ListHandler).Methods(http.MethodGet)
+	r.HandleFunc("/update/{id}", handlers.UpdateHandler).Methods(http.MethodPatch)
+	r.HandleFunc("/delete/{id}", handlers.DeleteHandler).Methods(http.MethodDelete)
 }

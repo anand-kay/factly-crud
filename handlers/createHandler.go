@@ -3,10 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"errors"
-	"html"
 	"io/ioutil"
 	"net/http"
-	"regexp"
 	"strings"
 
 	"github.com/lib/pq"
@@ -49,7 +47,7 @@ func CreateHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func (userInfo *userInfo) insertToDb() (int, error) {
-	_, err := Db.Query("INSERT INTO users(username,email) VALUES ($1,$2)", userInfo.UserName, userInfo.Email)
+	_, err := Db.Exec("INSERT INTO users(username,email) VALUES ($1,$2)", userInfo.UserName, userInfo.Email)
 	if err != nil {
 		if errDb, ok := err.(*pq.Error); ok {
 			if errDb.Code.Name() == "unique_violation" {
@@ -83,27 +81,27 @@ func (userInfo *userInfo) checkData() (bool, string) {
 	return true, ""
 }
 
-func checkUsername(username string) bool {
-	re := regexp.MustCompile("^[A-Za-z]+$")
+// func checkUsername(username string) bool {
+// 	re := regexp.MustCompile("^[A-Za-z]+$")
 
-	if !re.MatchString(username) {
-		return false
-	}
+// 	if !re.MatchString(username) {
+// 		return false
+// 	}
 
-	return true
-}
+// 	return true
+// }
 
-func checkEmail(email string) bool {
-	re := regexp.MustCompile("^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$")
+// func checkEmail(email string) bool {
+// 	re := regexp.MustCompile("^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$")
 
-	if !re.MatchString(email) {
-		return false
-	}
+// 	if !re.MatchString(email) {
+// 		return false
+// 	}
 
-	return true
-}
+// 	return true
+// }
 
-func (userInfo *userInfo) escapeHTML() {
-	userInfo.UserName = html.EscapeString(userInfo.UserName)
-	userInfo.Email = html.EscapeString(userInfo.Email)
-}
+// func (userInfo *userInfo) escapeHTML() {
+// 	userInfo.UserName = html.EscapeString(userInfo.UserName)
+// 	userInfo.Email = html.EscapeString(userInfo.Email)
+// }
