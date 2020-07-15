@@ -9,7 +9,12 @@ import (
 // Db - Database instance used throughout the app
 var Db *sql.DB
 
+var DbPort = "5433"
+var DbUsername = "anand"
+var DbPassword = "mypostgres"
+
 type userInfo struct {
+	ID       string `json:"id"`
 	UserName string `json:"username"`
 	Email    string `json:"email"`
 }

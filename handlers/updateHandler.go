@@ -66,8 +66,8 @@ func UpdateHandler(w http.ResponseWriter, req *http.Request) {
 
 	userFromDb, err := getUser(mux.Vars(req)["id"])
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Details updated but unable fetch user info"))
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(err.Error()))
 
 		return
 	}
@@ -110,8 +110,8 @@ func (userInfo *userInfo) updateInDb(field string, id string) (int, error) {
 func getUser(id string) (userInfo, error) {
 	var userFromDb userInfo
 
-	row := Db.QueryRow("SELECT username,email FROM users WHERE id=$1;", id)
-	switch err := row.Scan(&userFromDb.UserName, &userFromDb.Email); err {
+	row := Db.QueryRow("SELECT * FROM users WHERE id=$1;", id)
+	switch err := row.Scan(&userFromDb.ID, &userFromDb.UserName, &userFromDb.Email); err {
 	case sql.ErrNoRows:
 		return userFromDb, errors.New("User not found")
 	case nil:

@@ -49,14 +49,14 @@ func getUsers(pageNo int) ([]userInfo, error) {
 	var userInfos []userInfo
 	var userInfo userInfo
 
-	rows, err := Db.Query("SELECT username,email FROM users OFFSET $1 LIMIT 10", (pageNo * 10))
+	rows, err := Db.Query("SELECT * FROM users OFFSET $1 LIMIT 10", (pageNo * 10))
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
 	for rows.Next() {
-		if err := rows.Scan(&userInfo.UserName, &userInfo.Email); err != nil {
+		if err := rows.Scan(&userInfo.ID, &userInfo.UserName, &userInfo.Email); err != nil {
 			return nil, err
 		}
 
@@ -70,14 +70,14 @@ func getAllUsers() ([]userInfo, error) {
 	var userInfos []userInfo
 	var userInfo userInfo
 
-	rows, err := Db.Query("SELECT username,email FROM users;")
+	rows, err := Db.Query("SELECT * FROM users;")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
 	for rows.Next() {
-		if err := rows.Scan(&userInfo.UserName, &userInfo.Email); err != nil {
+		if err := rows.Scan(&userInfo.ID, &userInfo.UserName, &userInfo.Email); err != nil {
 			return nil, err
 		}
 
