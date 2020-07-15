@@ -23,3 +23,7 @@
   
 - DELETE : **localhost:3000/delete/1**
   - Delete user
+
+### UNIT TEST
+1. To run the unit test cases, `cd` into `/handlers` directory.
+2. Run `go test`
